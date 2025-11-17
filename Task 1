@@ -1,0 +1,42 @@
+import java.util.Scanner;
+
+public class CafeteriaPoll {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int[] responses = new int[40]; 
+        int[] freq = new int[11];
+
+        System.out.println("Enter 40 ratings (1 to 10):");
+
+        for (int i = 0; i < responses.length; i++) {
+            int rating;
+            do {
+                System.out.print("Rating " + (i + 1) + ": ");
+                rating = sc.nextInt();
+            } while (rating < 1 || rating > 10);
+
+            responses[i] = rating;
+            freq[rating]++;
+        }
+        int sum = 0, min = 10, max = 1;
+
+        for (int r : responses) {
+            sum += r;
+            if (r < min) min = r;
+            if (r > max) max = r;
+        }
+
+        double average = (double) sum / responses.length;
+
+        System.out.println("\n--- Poll Summary ---");
+        System.out.println("Average rating: " + average);
+        System.out.println("Highest rating: " + max);
+        System.out.println("Lowest rating: " + min);
+
+        System.out.println("\nRating frequency:");
+        for (int i = 1; i <= 10; i++) {
+            System.out.println(i + " → " + freq[i] + " time(s)");
+        }
+    }
+}
